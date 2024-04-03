@@ -3,14 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdf.hejiayunweb.mapper.HjyCommunityMapper">
-    <sql id="Base_Column_List">
-        community_id,community_name,community_code,
-        community_province_code,community_city_code,community_town_code,
-        community_detailed_address,community_longitude,community_latitude,
-        dept_id,community_sort,create_by,
-        create_time,update_by,update_time,
-        remark
-    </sql>
     
     <select id="paginationQueryCommunity" resultType="com.zdf.internalcommon.response.HjyCommunityDto">
         SELECT *,s1.name communityProvinceName,s2.name communityCityName,s3.name communityTownName from hjy_community h1
