@@ -11,7 +11,9 @@ import lombok.Getter;
 public enum StatusCode {
     //成功
     SUCCESS(1, "SUCCESS"),
-    FAIL(0, "FAIL");
+    FAIL(0, "FAIL"),
+    AREA_TABLE_IS_EMPTY(10001, "AREA TABLE IS EMPTY"),
+    INSRT_DATA_ERROR(10002, "INSRT DATA ERROR");
 
     private final int code;
     private final String message;

@@ -1,5 +1,6 @@
 package com.zdf.internalcommon.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -20,7 +21,7 @@ public class HjyCommunityEntity extends BaseEntity implements Serializable {
     /**
      * 小区id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long communityId;
 
     /**
