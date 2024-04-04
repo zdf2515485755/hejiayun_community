@@ -30,7 +30,7 @@ public class SysAreaServiceImpl extends ServiceImpl<SysAreaMapper, SysAreaEntity
             return ResponseResult.fail(StatusCode.AREA_TABLE_IS_EMPTY.getCode(), StatusCode.AREA_TABLE_IS_EMPTY.getMessage(), Collections.emptyList());
         }
         List<SysAreaResponseDto> sysAreaResponseDtoList = sysAreaEntities.stream()
-                .filter(sysAreaEntity -> Objects.equals(sysAreaEntity.getParentId(), SysAreaConstant.ROOT_AREA))
+                .filter(sysAreaEntity -> Objects.equals(sysAreaEntity.getParentId(), SysAreaConstant.ZERO))
                 .map(sysAreaEntity -> {
                     SysAreaResponseDto sysAreaResponseDto = new SysAreaResponseDto();
                     sysAreaResponseDto.setName(sysAreaEntity.getName());

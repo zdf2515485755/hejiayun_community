@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- *@Description 类功能简要描述
+ *@Description API for operating community
  *@Author mrzhang
  *@Date 2024/3/31 03:37
  */

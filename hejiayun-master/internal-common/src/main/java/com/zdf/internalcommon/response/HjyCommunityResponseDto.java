@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- *@Description 类功能简要描述
+ *@Description Hjy community response
  *@Author mrzhang
  *@Date 2024/4/1 22:54
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class HjyCommunityDto extends BaseEntity {
+public class HjyCommunityResponseDto extends BaseEntity {
 
     private Long communityId;
     private String communityName;

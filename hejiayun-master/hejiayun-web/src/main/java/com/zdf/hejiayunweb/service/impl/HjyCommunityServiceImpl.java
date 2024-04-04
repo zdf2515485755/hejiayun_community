@@ -11,7 +11,7 @@ import com.zdf.internalcommon.entity.HjyCommunityEntity;
 import com.zdf.internalcommon.request.InsertCommunityRequestDto;
 import com.zdf.internalcommon.request.PaginationQueryCommunityRequestDto;
 import com.zdf.internalcommon.request.UpdateCommunityRequestDto;
-import com.zdf.internalcommon.response.HjyCommunityDto;
+import com.zdf.internalcommon.response.HjyCommunityResponseDto;
 import com.zdf.internalcommon.response.PaginationQueryResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import com.zdf.internalcommon.util.JpaUtil;
@@ -36,8 +36,8 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
     private HjyCommunityMapper hjyCommunityMapper;
     public ResponseResult<PaginationQueryResponseDto> paginationQueryCommunity(PaginationQueryCommunityRequestDto paginationQueryCommunityRequestDto){
         PageMethod.startPage(paginationQueryCommunityRequestDto.getPageNum(), paginationQueryCommunityRequestDto.getPageSize());
-        List<HjyCommunityDto> paginationQueryList = hjyCommunityMapper.paginationQueryCommunity(paginationQueryCommunityRequestDto.getCommunityName(), paginationQueryCommunityRequestDto.getCommunityCode());
-        PageInfo<HjyCommunityDto>pageInfo = PageInfo.of(paginationQueryList);
+        List<HjyCommunityResponseDto> paginationQueryList = hjyCommunityMapper.paginationQueryCommunity(paginationQueryCommunityRequestDto.getCommunityName(), paginationQueryCommunityRequestDto.getCommunityCode());
+        PageInfo<HjyCommunityResponseDto>pageInfo = PageInfo.of(paginationQueryList);
         long totalSize = pageInfo.getTotal();
         int pageSize = pageInfo.getPageSize();
         PaginationQueryResponseDto paginationQueryResponseDto = PaginationQueryResponseDto.builder()
@@ -71,7 +71,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
 
     public ResponseResult<Integer> deleteCommunity(Long[] communityIdArray){
         if (Objects.isNull(communityIdArray) || communityIdArray.length == HjyCommunityConstant.ZERO){
-            return ResponseResult.fail(StatusCode.COMMUNITY_Id_IS_EMPTY.getCode(), StatusCode.COMMUNITY_Id_IS_EMPTY.getMessage());
+            return ResponseResult.fail(StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getCode(), StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getMessage());
         }
         int count = hjyCommunityMapper.deleteBatchIds(Arrays.asList(communityIdArray));
         return count > 0 ? ResponseResult.success(count) : ResponseResult.fail(StatusCode.DELETE_COMMUNITY_ERROR.getCode(), StatusCode.DELETE_COMMUNITY_ERROR.getMessage(), count);

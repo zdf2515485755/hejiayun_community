@@ -2,7 +2,7 @@ package com.zdf.hejiayunweb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zdf.internalcommon.entity.HjyCommunityEntity;
-import com.zdf.internalcommon.response.HjyCommunityDto;
+import com.zdf.internalcommon.response.HjyCommunityResponseDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,7 +24,7 @@ public interface HjyCommunityMapper extends BaseMapper<HjyCommunityEntity> {
      * @description Pagination query community
      * @date 2024/4/1 03:50
      */
-    List<HjyCommunityDto> paginationQueryCommunity(@Param("communityName") String communityName, @Param("communityCode") String communityCode);
+    List<HjyCommunityResponseDto> paginationQueryCommunity(@Param("communityName") String communityName, @Param("communityCode") String communityCode);
 }
 
 
