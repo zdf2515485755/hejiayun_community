@@ -3,8 +3,8 @@ package com.zdf.hejiayunsystem.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zdf.hejiayunsystem.mapper.SysDeptMapper;
 import com.zdf.hejiayunsystem.service.SysDeptService;
+import com.zdf.internalcommon.constant.CommonConstant;
 import com.zdf.internalcommon.constant.StatusCode;
-import com.zdf.internalcommon.constant.SysDeptConstant;
 import com.zdf.internalcommon.entity.SysDeptEntity;
 import com.zdf.internalcommon.response.SysDeptResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
@@ -38,7 +38,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
         if (Objects.isNull(sysDeptEntities) || sysDeptEntities.isEmpty()){
             return ResponseResult.fail(StatusCode.DEPT_TABLE_IS_EMPTY.getCode(), StatusCode.DEPT_TABLE_IS_EMPTY.getMessage(), Collections.emptyList());
         }
-        List<SysDeptResponseDto> sysDeptResponseDtoList = sysDeptEntities.stream().filter(sysDeptEntity -> Integer.parseInt(sysDeptEntity.getDelFlag()) == SysDeptConstant.ZERO)
+        List<SysDeptResponseDto> sysDeptResponseDtoList = sysDeptEntities.stream().filter(sysDeptEntity -> Integer.parseInt(sysDeptEntity.getDelFlag()) == CommonConstant.ZERO)
                 .map(sysDeptEntity -> {
                     SysDeptResponseDto sysDeptResponseDto = new SysDeptResponseDto();
                     sysDeptResponseDto.setDeptId(sysDeptEntity.getDeptId());
@@ -64,7 +64,3 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
         return Collections.emptyList();
     }
 }
-
-
-
-

@@ -20,7 +20,3 @@ public interface SysAreaMapper extends BaseMapper<SysAreaEntity> {
      */
     List<SysAreaEntity> quetyAllArea();
 }
-
-
-
-

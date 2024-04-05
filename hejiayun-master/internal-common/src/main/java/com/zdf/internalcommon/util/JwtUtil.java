@@ -6,7 +6,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zdf.internalcommon.constant.JwtConstant;
 import com.zdf.internalcommon.result.TokenResult;
-import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -17,7 +16,6 @@ import java.util.Map;
  *@Author mrzhang
  *@Date 2024/3/25 02:25
  */
-@Component
 public class JwtUtil {
     private static final String JWT_TOKEN_TIME = "tokenTime";
     private static final String JWT_TOKEN_NAME = "tokenName";

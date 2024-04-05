@@ -9,5 +9,4 @@ import com.zdf.internalcommon.entity.SysAreaEntity;
 * @createDate 2024-04-02 17:28:38
 */
 public interface SysAreaService extends IService<SysAreaEntity> {
-
 }

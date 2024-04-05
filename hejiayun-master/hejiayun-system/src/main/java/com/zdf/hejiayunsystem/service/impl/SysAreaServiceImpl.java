@@ -3,15 +3,17 @@ package com.zdf.hejiayunsystem.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zdf.hejiayunsystem.mapper.SysAreaMapper;
 import com.zdf.hejiayunsystem.service.SysAreaService;
+import com.zdf.internalcommon.constant.CommonConstant;
 import com.zdf.internalcommon.constant.StatusCode;
-import com.zdf.internalcommon.constant.SysAreaConstant;
 import com.zdf.internalcommon.entity.SysAreaEntity;
 import com.zdf.internalcommon.response.SysAreaResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +32,7 @@ public class SysAreaServiceImpl extends ServiceImpl<SysAreaMapper, SysAreaEntity
             return ResponseResult.fail(StatusCode.AREA_TABLE_IS_EMPTY.getCode(), StatusCode.AREA_TABLE_IS_EMPTY.getMessage(), Collections.emptyList());
         }
         List<SysAreaResponseDto> sysAreaResponseDtoList = sysAreaEntities.stream()
-                .filter(sysAreaEntity -> Objects.equals(sysAreaEntity.getParentId(), SysAreaConstant.ZERO))
+                .filter(sysAreaEntity -> Objects.equals(sysAreaEntity.getParentId(), CommonConstant.ZERO))
                 .map(sysAreaEntity -> {
                     SysAreaResponseDto sysAreaResponseDto = new SysAreaResponseDto();
                     sysAreaResponseDto.setName(sysAreaEntity.getName());
@@ -55,9 +57,4 @@ public class SysAreaServiceImpl extends ServiceImpl<SysAreaMapper, SysAreaEntity
         }
         return Collections.emptyList();
     }
-
 }
-
-
-
-

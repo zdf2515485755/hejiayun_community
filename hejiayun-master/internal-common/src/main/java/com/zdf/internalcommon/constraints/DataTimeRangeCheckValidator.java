@@ -36,4 +36,3 @@ public class DataTimeRangeCheckValidator implements ConstraintValidator<DateTime
         return now.isAfter(dateValue);
     }
 }
-

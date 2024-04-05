@@ -1,8 +1,10 @@
 package com.zdf.internalcommon.response;
 
 import com.zdf.internalcommon.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *@Description Hjy community response
@@ -11,6 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class HjyCommunityResponseDto extends BaseEntity {
 
     private Long communityId;
@@ -27,5 +31,4 @@ public class HjyCommunityResponseDto extends BaseEntity {
     private String communityLatitude;
     private Long deptId;
     private Integer communitySort;
-
 }

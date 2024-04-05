@@ -7,22 +7,27 @@ import com.zdf.hejiayunweb.mapper.HjyCommunityMapper;
 import com.zdf.hejiayunweb.service.HjyCommunityService;
 import com.zdf.internalcommon.constant.HjyCommunityConstant;
 import com.zdf.internalcommon.constant.StatusCode;
+import com.zdf.internalcommon.entity.ExcelExportEntity;
 import com.zdf.internalcommon.entity.HjyCommunityEntity;
 import com.zdf.internalcommon.request.InsertCommunityRequestDto;
 import com.zdf.internalcommon.request.PaginationQueryCommunityRequestDto;
+import com.zdf.internalcommon.request.PaginationQueryRequestDto;
 import com.zdf.internalcommon.request.UpdateCommunityRequestDto;
 import com.zdf.internalcommon.response.HjyCommunityResponseDto;
 import com.zdf.internalcommon.response.PaginationQueryResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
+import com.zdf.internalcommon.util.ExcelUtil;
 import com.zdf.internalcommon.util.JpaUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
 * @author mrzhang
@@ -77,8 +82,20 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         return count > 0 ? ResponseResult.success(count) : ResponseResult.fail(StatusCode.DELETE_COMMUNITY_ERROR.getCode(), StatusCode.DELETE_COMMUNITY_ERROR.getMessage(), count);
     }
 
+    public void downloadExcel(PaginationQueryRequestDto paginationQueryRequestDto, HttpServletResponse httpServletResponse){
+        PageMethod.startPage(paginationQueryRequestDto.getPageNum(), paginationQueryRequestDto.getPageSize());
+        List<HjyCommunityResponseDto> paginationQueryList = hjyCommunityMapper.paginationQueryCommunity(null, null);
+        List<ExcelExportEntity> excelExportEntities = paginationQueryList.stream().map(hjyCommunityResponse -> {
+            ExcelExportEntity excelExportEntity = new ExcelExportEntity();
+            excelExportEntity.setCommunityCityName(hjyCommunityResponse.getCommunityCityName());
+            excelExportEntity.setCommunityName(hjyCommunityResponse.getCommunityName());
+            excelExportEntity.setCommunityProvinceName(hjyCommunityResponse.getCommunityProvinceName());
+            excelExportEntity.setCommunityTownName(hjyCommunityResponse.getCommunityTownName());
+            excelExportEntity.setCommunityCode(hjyCommunityResponse.getCommunityCode());
+            excelExportEntity.setCreateTime(hjyCommunityResponse.getCreateTime());
+            excelExportEntity.setRemark(hjyCommunityResponse.getRemark());
+            return excelExportEntity;
+        }).collect(Collectors.toList());
+        ExcelUtil.downloadFile(httpServletResponse, "小区信息表", "小区", excelExportEntities);
+    }
 }
-
-
-
-

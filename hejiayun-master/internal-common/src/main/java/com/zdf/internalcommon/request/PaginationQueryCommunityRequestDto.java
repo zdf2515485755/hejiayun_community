@@ -1,16 +1,20 @@
 package com.zdf.internalcommon.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *@Description Pagination query community request
  *@Author mrzhang
  *@Date 2024/3/31 03:49
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class PaginationQueryCommunityRequestDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class PaginationQueryCommunityRequestDto extends PaginationQueryRequestDto{
     /**
      * 小区名称
      */
@@ -19,8 +23,4 @@ public class PaginationQueryCommunityRequestDto {
      * 小区编码
      */
     private String communityCode;
-    @NotNull(message = "page size can not be null ")
-    private Integer pageSize;
-    @NotNull(message = "page num can not be null ")
-    private  Integer pageNum;
 }

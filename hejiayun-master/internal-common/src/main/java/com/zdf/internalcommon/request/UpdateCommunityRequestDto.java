@@ -1,7 +1,5 @@
 package com.zdf.internalcommon.request;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.zdf.internalcommon.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +15,6 @@ public class UpdateCommunityRequestDto extends BaseEntity {
     /**
      * 小区id
      */
-    @TableId(type = IdType.AUTO)
     private Long communityId;
 
     /**
