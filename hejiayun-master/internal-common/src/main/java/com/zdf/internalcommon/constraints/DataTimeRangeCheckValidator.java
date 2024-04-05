@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- *@Description Datatime range check validator
+ *@Description Datetime range check validator
  *@Author mrzhang
  *@Date 2024/3/18 19:42
  */

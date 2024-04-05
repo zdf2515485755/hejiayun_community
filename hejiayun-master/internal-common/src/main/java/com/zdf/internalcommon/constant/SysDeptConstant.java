@@ -3,12 +3,13 @@ package com.zdf.internalcommon.constant;
 import lombok.Data;
 
 /**
- *@Description SysArea constant
+ *@Description SysDept constant
  *@Author mrzhang
- *@Date 2024/4/2 23:07
+ *@Date 2024/4/4 20:10
  */
 @Data
-public class SysAreaConstant {
+public class SysDeptConstant {
     public static final Integer ZERO = 0;
-    private SysAreaConstant(){}
+
+    private SysDeptConstant(){}
 }

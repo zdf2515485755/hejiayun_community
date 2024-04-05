@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- *@Description 类功能简要描述
+ *@Description Update community request
  *@Author mrzhang
  *@Date 2024/4/3 20:41
  */

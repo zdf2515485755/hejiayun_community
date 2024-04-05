@@ -15,7 +15,7 @@ public interface SysAreaMapper extends BaseMapper<SysAreaEntity> {
     /**
      * @return List<SysAreaEntity>
      * @author mrzhang
-     * @description Quety all area
+     * @description Query all area
      * @date 2024/4/2 22:39
      */
     List<SysAreaEntity> quetyAllArea();

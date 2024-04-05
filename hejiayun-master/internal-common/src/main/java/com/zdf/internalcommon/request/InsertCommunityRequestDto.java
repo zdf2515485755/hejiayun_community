@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.NotBlank;
 
 /**
- *@Description 类功能简要描述
+ *@Description Insert community request
  *@Author mrzhang
  *@Date 2024/4/2 02:15
  */

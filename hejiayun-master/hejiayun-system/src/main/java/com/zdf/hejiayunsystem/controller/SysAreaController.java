@@ -11,18 +11,18 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- *@Description 类功能简要描述
+ *@Description API for operating area
  *@Author mrzhang
  *@Date 2024/4/2 18:30
  */
 @RestController
 @RequestMapping("/area")
-public class SysAreaCtroller {
+public class SysAreaController {
     @Resource
-    private SysAreaServiceImpl sysAreaServiceImpl;
+    private SysAreaServiceImpl sysAreaService;
 
     @GetMapping("/queryArea")
     public ResponseResult<List<SysAreaResponseDto>> queryArea(){
-        return sysAreaServiceImpl.queryArea();
+        return sysAreaService.queryArea();
     }
 }

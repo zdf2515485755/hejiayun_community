@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdf.hejiayunweb.mapper.HjyCommunityMapper">
     
-    <select id="paginationQueryCommunity" resultType="com.zdf.internalcommon.response.HjyCommunityDto">
+    <select id="paginationQueryCommunity" resultType="com.zdf.internalcommon.response.HjyCommunityResponseDto">
         SELECT *,s1.name communityProvinceName,s2.name communityCityName,s3.name communityTownName from hjy_community h1
         INNER JOIN sys_area s1 on h1.community_province_code = s1.code
         INNER JOIN sys_area s2 on h1.community_city_code = s2.code

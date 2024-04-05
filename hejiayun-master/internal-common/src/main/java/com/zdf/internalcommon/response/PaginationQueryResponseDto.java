@@ -15,5 +15,5 @@ import java.util.List;
 public class PaginationQueryResponseDto {
    private Long totalSize;
    private Integer pageSize;
-   private List<HjyCommunityDto> hjyCommunityEntityList;
+   private List<HjyCommunityResponseDto> hjyCommunityEntityList;
 }

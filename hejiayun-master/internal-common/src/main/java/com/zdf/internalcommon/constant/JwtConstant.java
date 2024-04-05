@@ -3,13 +3,13 @@ package com.zdf.internalcommon.constant;
 import lombok.Data;
 
 /**
- *@Description 类功能简要描述
+ *@Description Jwt constant
  *@Author mrzhang
  *@Date 2024/3/25 18:36
  */
 @Data
 public class JwtConstant {
-    public static final String SIGN = "zasg1524&'%$";
+    public static final String SIGN = "sass1524&'%$";
 
     private JwtConstant(){}
 }
