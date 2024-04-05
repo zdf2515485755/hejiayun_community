@@ -1,5 +1,6 @@
 package com.zdf.internalcommon.constant;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Getter;
  * @date 2024/3/16 19:43
  */
 @Getter
+@AllArgsConstructor
 public enum StatusCode {
     //成功
     SUCCESS(1, "SUCCESS"),
@@ -23,9 +25,4 @@ public enum StatusCode {
 
     private final int code;
     private final String message;
-
-    StatusCode(int code, String message){
-        this.code = code;
-        this.message = message;
-    }
 }

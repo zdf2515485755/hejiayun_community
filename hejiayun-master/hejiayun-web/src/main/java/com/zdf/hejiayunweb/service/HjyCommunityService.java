@@ -9,5 +9,4 @@ import com.zdf.internalcommon.entity.HjyCommunityEntity;
 * @createDate 2024-03-31 01:33:13
 */
 public interface HjyCommunityService extends IService<HjyCommunityEntity> {
-
 }

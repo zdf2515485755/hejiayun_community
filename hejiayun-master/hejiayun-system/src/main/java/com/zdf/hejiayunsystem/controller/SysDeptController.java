@@ -27,5 +27,4 @@ public class SysDeptController {
     public ResponseResult<List<SysDeptResponseDto>> queryDept(@NotBlank @RequestParam("delFlag") String delFlag){
         return sysDeptService.queryDept(delFlag);
     }
-
 }

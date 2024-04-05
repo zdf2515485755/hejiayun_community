@@ -3,6 +3,7 @@ package com.zdf.hejiayunweb.controller;
 import com.zdf.hejiayunweb.service.impl.HjyCommunityServiceImpl;
 import com.zdf.internalcommon.request.InsertCommunityRequestDto;
 import com.zdf.internalcommon.request.PaginationQueryCommunityRequestDto;
+import com.zdf.internalcommon.request.PaginationQueryRequestDto;
 import com.zdf.internalcommon.request.UpdateCommunityRequestDto;
 import com.zdf.internalcommon.response.PaginationQueryResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *@Description API for operating community
@@ -39,5 +41,10 @@ public class HjyCommunityController {
     @GetMapping("/deleteCommunity")
     public ResponseResult<Integer> deleteCommunity(@RequestParam("communityIdArray") Long[] communityIdArray){
         return hjyCommunityService.deleteCommunity(communityIdArray);
+    }
+
+    @GetMapping("/downloadExcel")
+    public void downloadExcel(@Validated @RequestBody PaginationQueryRequestDto paginationQueryRequestDto, HttpServletResponse httpServletResponse){
+        hjyCommunityService.downloadExcel(paginationQueryRequestDto, httpServletResponse);
     }
 }

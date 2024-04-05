@@ -26,7 +26,3 @@ public interface HjyCommunityMapper extends BaseMapper<HjyCommunityEntity> {
      */
     List<HjyCommunityResponseDto> paginationQueryCommunity(@Param("communityName") String communityName, @Param("communityCode") String communityCode);
 }
-
-
-
-

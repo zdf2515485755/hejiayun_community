@@ -22,7 +22,3 @@ public interface SysDeptMapper extends BaseMapper<SysDeptEntity> {
      */
     List<SysDeptEntity> queryDept(@Param("delFlag") String delFlag);
 }
-
-
-
-
