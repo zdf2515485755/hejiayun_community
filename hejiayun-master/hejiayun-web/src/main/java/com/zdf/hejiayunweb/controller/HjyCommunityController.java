@@ -1,6 +1,7 @@
 package com.zdf.hejiayunweb.controller;
 
 import com.zdf.hejiayunweb.service.impl.HjyCommunityServiceImpl;
+import com.zdf.internalcommon.entity.HjyCommunityEntity;
 import com.zdf.internalcommon.request.InsertCommunityRequestDto;
 import com.zdf.internalcommon.request.PaginationQueryCommunityRequestDto;
 import com.zdf.internalcommon.request.PaginationQueryRequestDto;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *@Description API for operating community
@@ -46,5 +48,10 @@ public class HjyCommunityController {
     @GetMapping("/downloadExcel")
     public void downloadExcel(@Validated @RequestBody PaginationQueryRequestDto paginationQueryRequestDto, HttpServletResponse httpServletResponse){
         hjyCommunityService.downloadExcel(paginationQueryRequestDto, httpServletResponse);
+    }
+
+    @GetMapping("/dropDownList")
+    public ResponseResult<List<HjyCommunityEntity>> dropDownList(){
+        return hjyCommunityService.dropDownList();
     }
 }
