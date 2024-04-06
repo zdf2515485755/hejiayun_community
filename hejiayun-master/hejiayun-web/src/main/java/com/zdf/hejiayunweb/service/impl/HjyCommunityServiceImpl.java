@@ -1,5 +1,6 @@
 package com.zdf.hejiayunweb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
@@ -97,5 +98,10 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
             return excelExportEntity;
         }).collect(Collectors.toList());
         ExcelUtil.downloadFile(httpServletResponse, "小区信息表", "小区", excelExportEntities);
+    }
+
+    public ResponseResult<List<HjyCommunityEntity>> dropDownList(){
+        QueryWrapper<HjyCommunityEntity> queryWrapper = new QueryWrapper<>();
+        return ResponseResult.success(hjyCommunityMapper.selectList(queryWrapper));
     }
 }
