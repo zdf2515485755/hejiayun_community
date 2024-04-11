@@ -26,6 +26,8 @@ public class SysAreaServiceImpl extends ServiceImpl<SysAreaMapper, SysAreaEntity
     implements SysAreaService {
     @Resource
     private SysAreaMapper sysAreaMapper;
+
+    @Override
     public ResponseResult<List<SysAreaResponseDto>> queryArea(){
         List<SysAreaEntity> sysAreaEntities = sysAreaMapper.quetyAllArea();
         if (Objects.isNull(sysAreaEntities) || sysAreaEntities.isEmpty()){

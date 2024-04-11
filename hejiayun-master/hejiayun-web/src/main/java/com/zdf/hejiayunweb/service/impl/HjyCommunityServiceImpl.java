@@ -40,6 +40,8 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
     implements HjyCommunityService {
     @Resource
     private HjyCommunityMapper hjyCommunityMapper;
+
+    @Override
     public ResponseResult<PaginationQueryResponseDto> paginationQueryCommunity(PaginationQueryCommunityRequestDto paginationQueryCommunityRequestDto){
         PageMethod.startPage(paginationQueryCommunityRequestDto.getPageNum(), paginationQueryCommunityRequestDto.getPageSize());
         List<HjyCommunityResponseDto> paginationQueryList = hjyCommunityMapper.paginationQueryCommunity(paginationQueryCommunityRequestDto.getCommunityName(), paginationQueryCommunityRequestDto.getCommunityCode());
@@ -54,6 +56,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         return ResponseResult.success(paginationQueryResponseDto);
     }
 
+    @Override
     public ResponseResult<Integer> insertCommunity(InsertCommunityRequestDto insertCommunityRequestDto){
         HjyCommunityEntity hjyCommunityEntity = new HjyCommunityEntity();
         BeanUtils.copyProperties(insertCommunityRequestDto, hjyCommunityEntity);
@@ -62,6 +65,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         return count > 0 ? ResponseResult.success(count):ResponseResult.fail(StatusCode.INSERT_DATA_ERROR.getCode(), StatusCode.INSERT_DATA_ERROR.getMessage(), count);
     }
 
+    @Override
     public ResponseResult<Integer> updateCommunity(UpdateCommunityRequestDto updateCommunityRequestDto){
         HjyCommunityEntity hjyCommunityEntity = hjyCommunityMapper.selectById(updateCommunityRequestDto.getCommunityId());
         if (Objects.isNull(hjyCommunityEntity)){
@@ -75,6 +79,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         return ResponseResult.success(count);
     }
 
+    @Override
     public ResponseResult<Integer> deleteCommunity(Long[] communityIdArray){
         if (Objects.isNull(communityIdArray) || communityIdArray.length == HjyCommunityConstant.ZERO){
             return ResponseResult.fail(StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getCode(), StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getMessage());
@@ -83,6 +88,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         return count > 0 ? ResponseResult.success(count) : ResponseResult.fail(StatusCode.DELETE_COMMUNITY_ERROR.getCode(), StatusCode.DELETE_COMMUNITY_ERROR.getMessage(), count);
     }
 
+    @Override
     public void downloadExcel(PaginationQueryRequestDto paginationQueryRequestDto, HttpServletResponse httpServletResponse){
         PageMethod.startPage(paginationQueryRequestDto.getPageNum(), paginationQueryRequestDto.getPageSize());
         List<HjyCommunityResponseDto> paginationQueryList = hjyCommunityMapper.paginationQueryCommunity(null, null);
@@ -100,6 +106,7 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
         ExcelUtil.downloadFile(httpServletResponse, "小区信息表", "小区", excelExportEntities);
     }
 
+    @Override
     public ResponseResult<List<HjyCommunityEntity>> dropDownList(){
         QueryWrapper<HjyCommunityEntity> queryWrapper = new QueryWrapper<>();
         return ResponseResult.success(hjyCommunityMapper.selectList(queryWrapper));
