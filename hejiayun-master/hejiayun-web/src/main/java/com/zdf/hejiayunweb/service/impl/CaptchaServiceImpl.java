@@ -3,6 +3,7 @@ package com.zdf.hejiayunweb.service.impl;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import com.zdf.hejiayunweb.service.CaptchaService;
+import com.zdf.internalcommon.constant.RedisConstant;
 import com.zdf.internalcommon.response.VerificationCodeResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +30,11 @@ public class CaptchaServiceImpl implements CaptchaService {
     public ResponseResult<VerificationCodeResponseDto> getVerificationCode() {
         //生成验证码
         Captcha specCaptcha = new SpecCaptcha(130, 48, 5);
-        String verificationCodeKey = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        String verificationCodeKey = RedisConstant.VERIFY_CODE_KEY_PREFIX + uuid;
         String verificationCode = specCaptcha.text().toLowerCase();
-        log.info(verificationCode);
+        log.info("uuid: {}", uuid);
+        log.info("code: {}", verificationCode);
         // 存入redis
         redisTemplate.opsForValue().set(verificationCodeKey, verificationCode, 120, TimeUnit.SECONDS);
 
