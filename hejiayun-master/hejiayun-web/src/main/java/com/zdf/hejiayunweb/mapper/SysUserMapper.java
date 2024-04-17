@@ -2,7 +2,9 @@ package com.zdf.hejiayunweb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zdf.internalcommon.entity.SysUserEntity;
+import com.zdf.internalcommon.response.UserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author mrzhang
@@ -12,7 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUserEntity> {
-
+    UserInfoDto queryUserInfo(@Param("userId") Long userId);
 }
 
 

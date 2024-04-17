@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdf.hejiayunweb.mapper.SysMenuMapper">
+    <select id="selectMenuByUserId" resultType="string">
+        select distinct s3.perms from sys_user_role s1 inner join
+            sys_role_menu s2 on s1.role_id = s2.role_id
+        inner join sys_menu s3 on s2.menu_id = s3.menu_id
+        where s1.user_id = #{userId} and s3.status = '0'
+    </select>
+</mapper>

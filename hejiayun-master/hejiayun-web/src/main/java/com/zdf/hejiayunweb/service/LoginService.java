@@ -1,6 +1,7 @@
 package com.zdf.hejiayunweb.service;
 
 import com.zdf.internalcommon.request.LoginRequestDto;
+import com.zdf.internalcommon.response.GetUserInfoResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 
 /**
@@ -17,4 +18,12 @@ public interface LoginService {
      * @date 2024/4/12 01:25
      */
     ResponseResult<String> login(LoginRequestDto loginRequestDto);
+    /**
+     * @param userId:
+     * @return ResponseResult<GetUserInfoResponseDto>
+     * @author mrzhang
+     * @description get user info
+     * @date 2024/4/16 23:38
+     */
+    ResponseResult<GetUserInfoResponseDto> getUserInfo(Long userId);
 }

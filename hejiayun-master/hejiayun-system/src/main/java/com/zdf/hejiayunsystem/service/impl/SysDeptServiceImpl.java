@@ -28,6 +28,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDeptEntity
     @Resource
     private SysDeptMapper sysDeptMapper;
 
+    @Override
     public ResponseResult<List<SysDeptResponseDto>> queryDept(String delFlag){
         try {
             Integer.parseInt(delFlag);
