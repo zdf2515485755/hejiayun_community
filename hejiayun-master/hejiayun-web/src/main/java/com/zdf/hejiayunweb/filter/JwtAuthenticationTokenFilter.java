@@ -42,7 +42,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String redisKey = RedisConstant.USER_INFO_KEY_PREFIX + tokenResult.getUserName();
         UserDetails userInfo = (UserDetails) redisTemplate.opsForValue().get(redisKey);
         if (Objects.isNull(userInfo)){
-            throw new IOException("token is error");
+            throw new IOException("token is expire");
         }
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInfo, null, userInfo.getAuthorities());
         usernamePasswordAuthenticationToken.setDetails(userInfo);

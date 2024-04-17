@@ -59,7 +59,7 @@ public class SecurityConfig{
                 // 配置path是否需要认证
                 .authorizeRequests()
                 // 对于登录接口
-                .mvcMatchers("/captcha/getVerificationCode", "/user/login", "/user/getUseInfo/*").anonymous()
+                .mvcMatchers("/captcha/getVerificationCode", "/user/login", "/user/getUseInfo/*", "/user/getMenu/*").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

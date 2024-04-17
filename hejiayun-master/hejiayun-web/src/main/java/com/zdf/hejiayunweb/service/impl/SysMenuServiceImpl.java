@@ -7,7 +7,7 @@ import com.zdf.internalcommon.entity.SysMenuEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Set;
+import java.util.List;
 
 /**
 * @author mrzhang
@@ -22,11 +22,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenuEntity
     private SysMenuMapper sysMenuMapper;
 
     @Override
-    public Set<String> selectMenuByUserId(Long userId) {
+    public List<SysMenuEntity> selectMenuByUserId(Long userId) {
         return sysMenuMapper.selectMenuByUserId(userId);
     }
 }
-
-
-
-
