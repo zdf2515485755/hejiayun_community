@@ -7,6 +7,8 @@ package com.zdf.internalcommon.constant;
  */
 public class RedisConstant {
     public  static final String VERIFY_CODE_KEY_PREFIX = "verify_code:";
+    public static final String USER_INFO_KEY_PREFIX = "user_info:";
+    public static final Integer EXPIRE_TIME = 60;
 
     private RedisConstant(){}
 }

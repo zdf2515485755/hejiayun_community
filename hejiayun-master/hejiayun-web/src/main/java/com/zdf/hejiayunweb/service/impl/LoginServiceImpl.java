@@ -1,10 +1,15 @@
 package com.zdf.hejiayunweb.service.impl;
 
+import com.zdf.hejiayunweb.mapper.SysMenuMapper;
+import com.zdf.hejiayunweb.mapper.SysRoleMapper;
+import com.zdf.hejiayunweb.mapper.SysUserMapper;
 import com.zdf.hejiayunweb.security.LoginUserDetail;
 import com.zdf.hejiayunweb.service.LoginService;
 import com.zdf.internalcommon.constant.RedisConstant;
 import com.zdf.internalcommon.constant.StatusCode;
 import com.zdf.internalcommon.request.LoginRequestDto;
+import com.zdf.internalcommon.response.GetUserInfoResponseDto;
+import com.zdf.internalcommon.response.UserInfoDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import com.zdf.internalcommon.util.JwtUtil;
 import org.slf4j.Logger;
@@ -17,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  *@Description Service for login
@@ -29,6 +36,13 @@ public class LoginServiceImpl implements LoginService {
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private AuthenticationManager authenticationManager;
+    @Resource
+    private SysMenuMapper sysMenuMapper;
+    @Resource
+    private SysRoleMapper sysRoleMapper;
+    @Resource
+    private SysUserMapper sysUserMapper;
+
     private static final Logger log = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Override
@@ -54,7 +68,22 @@ public class LoginServiceImpl implements LoginService {
             return ResponseResult.fail(StatusCode.AUTHENTICATION_ERROR.getCode(), StatusCode.AUTHENTICATION_ERROR.getMessage(),null);
         }
         LoginUserDetail loginUserDetail = (LoginUserDetail)authenticate.getPrincipal();
-
+        redisTemplate.opsForValue().set(RedisConstant.USER_INFO_KEY_PREFIX + loginUserDetail.getUsername(), loginUserDetail, RedisConstant.EXPIRE_TIME, TimeUnit.DAYS);
         return ResponseResult.success(JwtUtil.generatorToken(loginUserDetail.getUsername(), loginUserDetail.getPassword()));
+    }
+
+    @Override
+    public ResponseResult<GetUserInfoResponseDto> getUserInfo(Long userId) {
+        Set<String> permitSet = sysMenuMapper.selectMenuByUserId(userId);
+        Set<String> roleSet = sysRoleMapper.selectRoleByUserId(userId);
+        UserInfoDto userInfoDto = sysUserMapper.queryUserInfo(userId);
+        if (userId == 1){
+            permitSet.add("*:*:*");
+        }
+        GetUserInfoResponseDto getUserInfoResponseDto = new GetUserInfoResponseDto();
+        getUserInfoResponseDto.setUserInfoDto(userInfoDto);
+        getUserInfoResponseDto.setRoleList(roleSet);
+        getUserInfoResponseDto.setPermissionList(permitSet);
+        return ResponseResult.success(getUserInfoResponseDto);
     }
 }

@@ -3,5 +3,55 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdf.hejiayunweb.mapper.SysUserMapper">
+    <resultMap id="userInfo" type="com.zdf.internalcommon.response.UserInfoDto">
+        <id property="userId"                          column="user_id" />
+        <result property="deptId"                      column="dept_id" />
+        <result property="userName"                    column="user_name" />
+        <result property="nickName"                    column="nick_name" />
+        <result property="email"                       column="email" />
+        <result property="phonenumber"                 column="phonenumber" />
+        <result property="avatar"                      column="avatar" />
+        <result property="password"                    column="password" />
+        <result property="status"                      column="status" />
+        <result property="deptId"                      column="del_flag" />
+        <result property="loginIp"                     column="login_ip" />
+        <result property="loginDate"                   column="login_date" />
+        <result property="createBy"                    column="create_by" />
+        <result property="createTime"                  column="create_time" />
+        <result property="updateBy"                    column="update_by" />
+        <result property="updateTime"                  column="update_time" />
+        <result property="remark"                      column="remark" />
+        <association property="sysDeptEntity"          javaType="com.zdf.internalcommon.entity.SysDeptEntity"  resultMap="deptInfo" />
+        <collection property="sysRoleEntityList"       javaType="java.util.List"  resultMap="roleInfo" />
+    </resultMap>
 
+    <resultMap id="deptInfo" type="com.zdf.internalcommon.entity.SysDeptEntity">
+        <id property="deptId" column="dept_id" />
+        <result property="parentId" column="parent_id"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="leader" column="leader"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <resultMap id="roleInfo" type="com.zdf.internalcommon.entity.SysRoleEntity">
+        <id property="roleId" column="role_id" />
+        <result property="roleName" column="role_name"/>
+        <result property="roleKey" column="role_key"/>
+        <result property="roleSort" column="role_sey"/>
+        <result property="dataScope" column="data_scope"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="queryUserInfo" resultMap="userInfo">
+        select *
+        from sys_user s1
+            inner join sys_user_role s2
+                on s1.user_id = s2.user_id
+            inner join sys_role s3
+                on s2.role_id = s3.role_id
+            inner  join sys_dept s5
+                on s1.dept_id = s5.dept_id
+        where s1.status = '0' and s1.del_flag = '0' and s1.user_id = #{userId}
+    </select>
 </mapper>

@@ -2,14 +2,13 @@ package com.zdf.hejiayunweb.controller;
 
 import com.zdf.hejiayunweb.service.impl.LoginServiceImpl;
 import com.zdf.internalcommon.request.LoginRequestDto;
+import com.zdf.internalcommon.response.GetUserInfoResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 
 /**
  *@Description API for operating login
@@ -26,5 +25,10 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseResult<String> login(@Validated @RequestBody LoginRequestDto loginRequestDto) {
         return loginService.login(loginRequestDto);
+    }
+
+    @GetMapping("/getUseInfo/{userId}")
+    public ResponseResult<GetUserInfoResponseDto> getUseInfo(@NotNull @PathVariable("userId") Long userId) {
+        return loginService.getUserInfo(userId);
     }
 }
