@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zdf.internalcommon.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Set;
+import java.util.List;
 
 /**
 * @author mrzhang
@@ -13,9 +13,5 @@ import java.util.Set;
 * @Entity generator.domain.SysMenu
 */
 public interface SysMenuMapper extends BaseMapper<SysMenuEntity> {
-    Set<String> selectMenuByUserId(@Param("userId") Long userId);
+    List<SysMenuEntity> selectMenuByUserId(@Param("userId") Long userId);
 }
-
-
-
-

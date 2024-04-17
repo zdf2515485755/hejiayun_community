@@ -8,6 +8,7 @@ import com.zdf.internalcommon.request.PaginationQueryRequestDto;
 import com.zdf.internalcommon.request.UpdateCommunityRequestDto;
 import com.zdf.internalcommon.response.PaginationQueryResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +50,7 @@ public class HjyCommunityController {
     public void downloadExcel(@Validated @RequestBody PaginationQueryRequestDto paginationQueryRequestDto, HttpServletResponse httpServletResponse){
         hjyCommunityService.downloadExcel(paginationQueryRequestDto, httpServletResponse);
     }
-
+    @PreAuthorize("hasAuthority('system:user:list')")
     @GetMapping("/dropDownList")
     public ResponseResult<List<HjyCommunityEntity>> dropDownList(){
         return hjyCommunityService.dropDownList();

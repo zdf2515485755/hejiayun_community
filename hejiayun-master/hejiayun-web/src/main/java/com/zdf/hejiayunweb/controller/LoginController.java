@@ -2,6 +2,7 @@ package com.zdf.hejiayunweb.controller;
 
 import com.zdf.hejiayunweb.service.impl.LoginServiceImpl;
 import com.zdf.internalcommon.request.LoginRequestDto;
+import com.zdf.internalcommon.response.GetMenuResponseDto;
 import com.zdf.internalcommon.response.GetUserInfoResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  *@Description API for operating login
@@ -30,5 +32,10 @@ public class LoginController {
     @GetMapping("/getUseInfo/{userId}")
     public ResponseResult<GetUserInfoResponseDto> getUseInfo(@NotNull @PathVariable("userId") Long userId) {
         return loginService.getUserInfo(userId);
+    }
+
+    @GetMapping("/getMenu/{userId}")
+    public ResponseResult<List<GetMenuResponseDto>> getMenu(@NotNull@PathVariable("userId") Long userId ){
+        return loginService.getMenu(userId);
     }
 }

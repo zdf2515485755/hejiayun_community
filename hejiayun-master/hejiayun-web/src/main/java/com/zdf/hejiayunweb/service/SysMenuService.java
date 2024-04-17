@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zdf.internalcommon.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Set;
+import java.util.List;
 
 /**
 * @author mrzhang
@@ -12,5 +12,5 @@ import java.util.Set;
 * @createDate 2024-04-16 01:31:13
 */
 public interface SysMenuService extends IService<SysMenuEntity> {
-    Set<String> selectMenuByUserId(@Param("userId") Long userId);
+    List<SysMenuEntity> selectMenuByUserId(@Param("userId") Long userId);
 }

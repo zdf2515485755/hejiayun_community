@@ -6,13 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 /**
- *@Description 类功能简要描述
+ *@Description Used to encapsulate login authentication information
  *@Author mrzhang
  *@Date 2024/4/12 19:42
  */
@@ -22,10 +23,12 @@ import java.util.Collections;
 public class LoginUserDetail implements UserDetails {
 
     private SysUserEntity sysUserEntity;
+    private Collection<String> permissionList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return permissionList.stream().map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @JsonIgnore

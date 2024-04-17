@@ -1,8 +1,11 @@
 package com.zdf.hejiayunweb.service;
 
 import com.zdf.internalcommon.request.LoginRequestDto;
+import com.zdf.internalcommon.response.GetMenuResponseDto;
 import com.zdf.internalcommon.response.GetUserInfoResponseDto;
 import com.zdf.internalcommon.result.ResponseResult;
+
+import java.util.List;
 
 /**
  * @Description 类功能简要描述
@@ -26,4 +29,12 @@ public interface LoginService {
      * @date 2024/4/16 23:38
      */
     ResponseResult<GetUserInfoResponseDto> getUserInfo(Long userId);
+    /**
+     * @param userId:
+     * @return ResponseResult<GetMenuResponseDto>
+     * @author mrzhang
+     * @description get menu
+     * @date 2024/4/17 22:27
+     */
+    ResponseResult<List<GetMenuResponseDto>> getMenu(Long userId );
 }
