@@ -13,5 +13,6 @@ public class ExcelConstant {
     public static final String CONTENT_DISPOSITION = "Content-disposition";
     public static final String DOWNLOAD_SETTING = "attachment;filename*=utf-8";
     public static final String FILE_SUFFIX = ".xlsx";
+
     private ExcelConstant(){}
 }

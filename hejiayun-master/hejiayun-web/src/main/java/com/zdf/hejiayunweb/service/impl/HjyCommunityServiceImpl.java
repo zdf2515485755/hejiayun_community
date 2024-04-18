@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
 import com.zdf.hejiayunweb.mapper.HjyCommunityMapper;
 import com.zdf.hejiayunweb.service.HjyCommunityService;
+import com.zdf.internalcommon.constant.CommonConstant;
 import com.zdf.internalcommon.constant.HjyCommunityConstant;
 import com.zdf.internalcommon.constant.StatusCode;
 import com.zdf.internalcommon.entity.ExcelExportEntity;
@@ -20,8 +21,10 @@ import com.zdf.internalcommon.result.ResponseResult;
 import com.zdf.internalcommon.util.ExcelUtil;
 import com.zdf.internalcommon.util.JpaUtil;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
@@ -40,6 +43,8 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
     implements HjyCommunityService {
     @Resource
     private HjyCommunityMapper hjyCommunityMapper;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public ResponseResult<PaginationQueryResponseDto> paginationQueryCommunity(PaginationQueryCommunityRequestDto paginationQueryCommunityRequestDto){
@@ -69,19 +74,19 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
     public ResponseResult<Integer> updateCommunity(UpdateCommunityRequestDto updateCommunityRequestDto){
         HjyCommunityEntity hjyCommunityEntity = hjyCommunityMapper.selectById(updateCommunityRequestDto.getCommunityId());
         if (Objects.isNull(hjyCommunityEntity)){
-            return ResponseResult.fail(StatusCode.COMMUNITY_IS_NOT_EXIT.getCode(), StatusCode.COMMUNITY_IS_NOT_EXIT.getMessage(), HjyCommunityConstant.ZERO);
+            return ResponseResult.fail(StatusCode.COMMUNITY_IS_NOT_EXIT.getCode(), StatusCode.COMMUNITY_IS_NOT_EXIT.getMessage(), CommonConstant.ZERO);
         }
         JpaUtil.copyNotNullProperties(updateCommunityRequestDto, hjyCommunityEntity);
         int count = hjyCommunityMapper.updateById(hjyCommunityEntity);
-        if (count <= HjyCommunityConstant.ZERO){
-            return ResponseResult.fail(StatusCode.UPDATE_COMMUNITY_ERROR.getCode(), StatusCode.UPDATE_COMMUNITY_ERROR.getMessage(), HjyCommunityConstant.ZERO);
+        if (count <= CommonConstant.ZERO){
+            return ResponseResult.fail(StatusCode.UPDATE_COMMUNITY_ERROR.getCode(), StatusCode.UPDATE_COMMUNITY_ERROR.getMessage(), CommonConstant.ZERO);
         }
         return ResponseResult.success(count);
     }
 
     @Override
     public ResponseResult<Integer> deleteCommunity(Long[] communityIdArray){
-        if (Objects.isNull(communityIdArray) || communityIdArray.length == HjyCommunityConstant.ZERO){
+        if (Objects.isNull(communityIdArray) || communityIdArray.length == CommonConstant.ZERO){
             return ResponseResult.fail(StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getCode(), StatusCode.COMMUNITY_NUMBER_IS_EMPTY.getMessage());
         }
         int count = hjyCommunityMapper.deleteBatchIds(Arrays.asList(communityIdArray));
@@ -110,5 +115,14 @@ public class HjyCommunityServiceImpl extends ServiceImpl<HjyCommunityMapper, Hjy
     public ResponseResult<List<HjyCommunityEntity>> dropDownList(){
         QueryWrapper<HjyCommunityEntity> queryWrapper = new QueryWrapper<>();
         return ResponseResult.success(hjyCommunityMapper.selectList(queryWrapper));
+    }
+
+    @PostConstruct
+    public void init(){
+        QueryWrapper<HjyCommunityEntity> objectQueryWrapper = new QueryWrapper<>();
+        List<HjyCommunityEntity> hjyCommunityEntities = hjyCommunityMapper.selectList(objectQueryWrapper);
+        hjyCommunityEntities.forEach(
+                hjyCommunityEntity -> redisTemplate.opsForValue().set(hjyCommunityEntity.getCommunityName(), hjyCommunityEntity)
+        );
     }
 }
