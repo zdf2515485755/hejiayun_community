@@ -1,6 +1,5 @@
-package com.zdf.internalcommon.interceptor;
+package com.zdf.hejiayunweb.handler;
 
-import com.zdf.internalcommon.constant.StatusCode;
 import com.zdf.internalcommon.result.ResponseResult;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +16,6 @@ public class GlobalExceptionHandler
     @ExceptionHandler(Exception.class)
     public ResponseResult exceptionHandler(Exception e)
     {
-        return ResponseResult.fail(StatusCode.FAIL.getCode(), StatusCode.FAIL.getMessage());
+        return ResponseResult.fail(e.getMessage());
     }
 }
