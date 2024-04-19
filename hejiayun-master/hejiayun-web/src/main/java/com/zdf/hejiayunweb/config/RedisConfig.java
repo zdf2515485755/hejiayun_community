@@ -1,4 +1,4 @@
-package com.zdf.internalcommon.config;
+package com.zdf.hejiayunweb.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
